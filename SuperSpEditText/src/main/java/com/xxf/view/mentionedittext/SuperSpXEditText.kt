@@ -17,7 +17,7 @@ import kotlin.collections.ArrayList
  * Date: 1/28/21 12:58 PM
  * Description:
  */
-class SuperSpXEditText : SpXEditText {
+open class SuperSpXEditText : SpXEditText {
     private val mListeners: ArrayList<OnAtTextWatcher> = ArrayList();
 
     constructor(context: Context) : super(context)
