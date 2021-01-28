@@ -41,7 +41,7 @@ open class SuperSpXEditText : SpXEditText {
     }
 
     fun insertSpan(user: MentionUser) {
-        insertSpannableString(this.text, user.spannableString)
+        insertSpannableString(this.text, user.spannableString, "@")
     }
 
     /**

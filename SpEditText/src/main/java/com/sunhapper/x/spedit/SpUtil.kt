@@ -42,6 +42,20 @@ fun insertSpannableString(editable: Editable?, text: CharSequence) {
     editable?.replace(start, end, text)
 }
 
+fun insertSpannableString(editable: Editable?, text: CharSequence, tag: String) {
+    var start = Selection.getSelectionStart(editable)
+    var end = Selection.getSelectionEnd(editable)
+    if (end == start && start >= 0) {
+        val lastIndexOf = editable?.substring(0, end)?.lastIndexOf(tag);
+        if (lastIndexOf != null) {
+            if (lastIndexOf >= 0) {
+                editable?.replace(lastIndexOf, end, text)
+            }
+        }
+    }
+}
+
+
 fun Editable.insertSpan(text: CharSequence) {
     var start = getSpanStart(SELECTION_START)
     var end = getSpanEnd(SELECTION_START)
