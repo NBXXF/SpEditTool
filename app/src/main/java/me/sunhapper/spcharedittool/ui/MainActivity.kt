@@ -13,7 +13,7 @@ import com.sunhapper.x.spedit.createGifDrawableSpan
 import com.sunhapper.x.spedit.createResizeGifDrawableSpan
 import com.sunhapper.x.spedit.gif.drawable.ProxyDrawable
 import com.sunhapper.x.spedit.insertSpannableString
-import com.sunhapper.x.spedit.view.SuperSpXEditText
+import com.xxf.view.mentionedittext.SuperSpXEditText
 import com.xxf.view.mentionedittext.span.Topic
 import kotlinx.android.synthetic.main.activity_main.*
 import me.sunhapper.spcharedittool.GlideApp
@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         spEdt.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
         spEdt.addTextChangedListener(object : SuperSpXEditText.OnAtTextWatcher() {
             override fun onAtMatched(matched: String?) {
-                System.out.println("==========>立即搜索"+matched)
+                System.out.println("==========>立即搜索" + matched)
             }
 
         })
@@ -68,16 +68,19 @@ class MainActivity : AppCompatActivity() {
 
 
     fun insertMention(view: View) {
-        spEdt.insertMention(MentionUser(userId = "999",name = "张三"+System.currentTimeMillis()))
+        spEdt.insertSpan(MentionUser(userId = "999", name = "张三"))
     }
 
     fun getData(view: View) {
+        Log.i(TAG, "=======>getData111: ${spEdt.getAllSpan()}")
+
         val dataSpans = spEdt.text?.getSpans(0, spEdt.length(), DataSpan::class.java)
         val stringBuilder = StringBuilder()
         stringBuilder.append("完整字符串：").append(spEdt.text)
                 .append("\n").append("特殊字符串：\n")
         if (dataSpans != null) {
             for (dataSpan in dataSpans) {
+
                 stringBuilder.append(dataSpan.toString())
                         .append("\n")
             }

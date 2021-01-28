@@ -1,15 +1,14 @@
-package com.sunhapper.x.spedit.view
+package com.xxf.view.mentionedittext
 
 import android.content.Context
+import android.text.*
 import androidx.annotation.CallSuper
-import android.text.Editable
-import android.text.Selection
-import android.text.TextUtils
-import android.text.TextWatcher
 import android.util.AttributeSet
 import com.sunhapper.x.spedit.insertSpannableString
+import com.sunhapper.x.spedit.view.SpXEditText
 import com.xxf.view.mentionedittext.span.DataSpan
 import com.xxf.view.mentionedittext.span.MentionUser
+import com.xxf.view.mentionedittext.span.SpanResult
 import kotlin.collections.ArrayList
 
 /**
@@ -41,10 +40,26 @@ open class SuperSpXEditText : SpXEditText {
         mListeners.remove(watcher);
     }
 
-    fun insertMention(user: MentionUser) {
+    fun insertSpan(user: MentionUser) {
         insertSpannableString(this.text, user.spannableString)
     }
 
+    /**
+     * 获取mentions
+     */
+    fun getAllSpan(): List<SpanResult> {
+        val list: MutableList<SpanResult> = mutableListOf();
+        if (!TextUtils.isEmpty(text)) {
+            val ssb = SpannableStringBuilder(text);
+            text!!.getSpans(0, text!!.length, DataSpan::class.java)?.forEach {
+                val spanStart = ssb.getSpanStart(it);
+                val spanEnd = ssb.getSpanEnd(it);
+                ssb.removeSpan(it);
+                list.add(SpanResult(spanStart, spanEnd, it));
+            }
+        }
+        return list;
+    }
 
     abstract class OnAtTextWatcher : TextWatcher {
 
