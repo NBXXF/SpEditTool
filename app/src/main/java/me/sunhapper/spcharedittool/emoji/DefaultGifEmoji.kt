@@ -2,7 +2,7 @@ package me.sunhapper.spcharedittool.emoji
 
 import android.content.Context
 import android.graphics.drawable.Drawable
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
 import com.sunhapper.x.spedit.gif.drawable.ProxyDrawable
 import me.sunhapper.spcharedittool.R
 import pl.droidsonroids.gif.GifDrawable

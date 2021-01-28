@@ -12,8 +12,8 @@ import com.sunhapper.x.spedit.mention.span.IntegratedSpan
  */
 class DefaultKeyEventProxy : KeyEventProxy {
     private val dpadKeyEvent = DpadKeyEvent()
-    override fun onKeyEvent(keyEvent: KeyEvent, text: Editable): Boolean {
-        if (dpadKeyEvent.onKeyEvent(keyEvent, text)) {
+    override fun onKeyEvent(keyEvent: KeyEvent, text: Editable?): Boolean {
+        if (dpadKeyEvent.onKeyEvent(keyEvent, text!!)) {
             return true
         }
         if (keyEvent.keyCode == KeyEvent.KEYCODE_DEL && keyEvent.action == KeyEvent.ACTION_DOWN) {

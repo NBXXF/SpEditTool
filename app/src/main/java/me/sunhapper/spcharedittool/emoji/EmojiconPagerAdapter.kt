@@ -1,10 +1,10 @@
 package me.sunhapper.spcharedittool.emoji
 
-import android.support.v4.view.PagerAdapter
+import androidx.viewpager.widget.PagerAdapter
 import android.view.View
 import android.view.ViewGroup
 
-class EmojiconPagerAdapter(private val views: List<View>) : PagerAdapter() {
+class EmojiconPagerAdapter(private val views: List<View>) : androidx.viewpager.widget.PagerAdapter() {
 
     override fun getCount(): Int {
         return views.size

@@ -8,5 +8,5 @@ import android.view.KeyEvent
  */
 interface KeyEventProxy {
 
-    fun onKeyEvent(keyEvent: KeyEvent, text: Editable): Boolean
+    fun onKeyEvent(keyEvent: KeyEvent, text: Editable?): Boolean
 }

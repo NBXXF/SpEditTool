@@ -1,9 +1,9 @@
 package me.sunhapper.spcharedittool.ui
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.util.Log
@@ -32,7 +32,7 @@ class RecyclerGlideDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_demo)
-        gif_recyclerView.layoutManager = LinearLayoutManager(this)
+        gif_recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         gif_recyclerView.adapter = adapter
         for (i in 0..99) {
             val gifDrawable: GifDrawable
@@ -57,7 +57,7 @@ class RecyclerGlideDemoActivity : AppCompatActivity() {
 
     }
 
-    internal inner class Adapter : RecyclerView.Adapter<ViewHolder>() {
+    internal inner class Adapter : androidx.recyclerview.widget.RecyclerView.Adapter<ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
@@ -82,7 +82,7 @@ class RecyclerGlideDemoActivity : AppCompatActivity() {
     }
 
 
-    internal inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    internal inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         var textView: TextView = itemView.findViewById(R.id.textView)
 

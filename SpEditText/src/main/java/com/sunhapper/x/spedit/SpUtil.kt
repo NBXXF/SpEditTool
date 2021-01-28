@@ -31,7 +31,7 @@ fun createGifDrawableSpan(gifDrawable: Drawable, text: CharSequence): Spannable 
     return spannable
 }
 
-fun insertSpannableString(editable: Editable, text: CharSequence) {
+fun insertSpannableString(editable: Editable?, text: CharSequence) {
     var start = Selection.getSelectionStart(editable)
     var end = Selection.getSelectionEnd(editable)
     if (end < start) {
@@ -39,7 +39,7 @@ fun insertSpannableString(editable: Editable, text: CharSequence) {
         start = end
         end = temp
     }
-    editable.replace(start, end, text)
+    editable?.replace(start, end, text)
 }
 
 fun Editable.insertSpan(text: CharSequence) {

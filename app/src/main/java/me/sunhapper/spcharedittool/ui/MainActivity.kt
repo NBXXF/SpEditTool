@@ -2,11 +2,8 @@ package me.sunhapper.spcharedittool.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.text.Editable
-import android.text.Selection
+import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -16,12 +13,13 @@ import com.sunhapper.x.spedit.createGifDrawableSpan
 import com.sunhapper.x.spedit.createResizeGifDrawableSpan
 import com.sunhapper.x.spedit.gif.drawable.ProxyDrawable
 import com.sunhapper.x.spedit.insertSpannableString
+import com.sunhapper.x.spedit.view.SuperSpXEditText
+import com.xxf.view.mentionedittext.span.Topic
 import kotlinx.android.synthetic.main.activity_main.*
 import me.sunhapper.spcharedittool.GlideApp
 import me.sunhapper.spcharedittool.R
-import me.sunhapper.spcharedittool.data.DataSpan
-import me.sunhapper.spcharedittool.data.MentionUser
-import me.sunhapper.spcharedittool.data.Topic
+import com.xxf.view.mentionedittext.span.DataSpan
+import com.xxf.view.mentionedittext.span.MentionUser
 import me.sunhapper.spcharedittool.emoji.DefaultGifEmoji
 import me.sunhapper.spcharedittool.emoji.DeleteEmoji
 import me.sunhapper.spcharedittool.emoji.Emoji
@@ -36,40 +34,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         spEdt.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
-        spEdt.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
+        spEdt.addTextChangedListener(object : SuperSpXEditText.OnAtTextWatcher() {
+            override fun onAtMatched(matched: String?) {
+                System.out.println("==========>立即搜索"+matched)
             }
 
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-//                System.out.println("==========>onTextChanged:" + s + "  " + start + " " + before + "   " + count)
-//                var substring = s.substring(0, start)
-//                val lastIndexOf = substring.lastIndexOf("@")
-//                if (lastIndexOf >= 0) {
-//                    substring=s.substring(lastIndexOf,start);
-//                    val spans = spEdt.text.getSpans(lastIndexOf, substring.length, DataSpan::class.java)
-//                    if (spans != null && spans.size > 0) {
-//                        System.out.println("==========>已经有了")
-//                    }else{
-//                        System.out.println("==========>立即搜索"+substring)
-//                    }
-//                }
-            }
-
-            override fun afterTextChanged(s: Editable) {
-                val start = Selection.getSelectionEnd(s);
-                var substring = s.substring(0, start)
-                val lastIndexOf = substring.lastIndexOf("@")
-                if (lastIndexOf >= 0) {
-                    substring=s.substring(lastIndexOf,start);
-                    val spans = spEdt.text.getSpans(lastIndexOf, substring.length, DataSpan::class.java)
-                    if (spans != null && spans.size > 0) {
-                        System.out.println("==========>已经有了")
-                    }else{
-                        System.out.println("==========>立即搜索"+substring)
-                    }
-                }
-            }
         })
 
         emojiInputView.listener = { emoji ->
@@ -99,17 +68,19 @@ class MainActivity : AppCompatActivity() {
 
 
     fun insertMention(view: View) {
-        replace(MentionUser().spannableString)
+        spEdt.insertMention(MentionUser(userId = "999",name = "张三"+System.currentTimeMillis()))
     }
 
     fun getData(view: View) {
-        val dataSpans = spEdt.text.getSpans(0, spEdt.length(), DataSpan::class.java)
+        val dataSpans = spEdt.text?.getSpans(0, spEdt.length(), DataSpan::class.java)
         val stringBuilder = StringBuilder()
         stringBuilder.append("完整字符串：").append(spEdt.text)
                 .append("\n").append("特殊字符串：\n")
-        for (dataSpan in dataSpans) {
-            stringBuilder.append(dataSpan.toString())
-                    .append("\n")
+        if (dataSpans != null) {
+            for (dataSpan in dataSpans) {
+                stringBuilder.append(dataSpan.toString())
+                        .append("\n")
+            }
         }
         Log.i(TAG, "getData: $stringBuilder")
         Toast.makeText(this, stringBuilder, Toast.LENGTH_SHORT).show()

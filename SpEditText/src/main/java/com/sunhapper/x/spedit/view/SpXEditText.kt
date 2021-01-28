@@ -14,7 +14,7 @@ import java.util.*
 /**
  * Created by sunhapper on 2019/1/25 .
  */
-class SpXEditText : android.support.v7.widget.AppCompatEditText {
+open class SpXEditText : androidx.appcompat.widget.AppCompatEditText {
     private var mKeyEventProxy: KeyEventProxy = DefaultKeyEventProxy()
 
     constructor(context: Context) : super(context)

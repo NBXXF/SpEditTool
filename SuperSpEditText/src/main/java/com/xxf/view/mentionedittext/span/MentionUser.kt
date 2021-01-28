@@ -1,4 +1,4 @@
-package me.sunhapper.spcharedittool.data
+package com.xxf.view.mentionedittext.span
 
 import android.graphics.Color
 import android.text.Spannable
@@ -10,10 +10,14 @@ import com.sunhapper.x.spedit.mention.span.BreakableSpan
 import com.sunhapper.x.spedit.mention.span.IntegratedBgSpan
 
 /**
- * Created by sunhapper on 2019/1/30 .
- * 使用三星输入法IntegratedSpan完整性不能保证，所以加上BreakableSpan使得@mention完整性被破坏时删除对应span
+ * @Author: XGod  xuanyouwu@163.com  17611639080
+ * Date: 1/28/21 12:58 PM
+ * Description:使用三星输入法IntegratedSpan完整性不能保证，所以加上BreakableSpan使得@mention完整性被破坏时删除对应span
  */
-class MentionUser(val name: String = "sunhapper")
+open class MentionUser(val userId: String = "0",
+                       val name: String = "test",
+                       val foregroundColor: Int = Color.RED,
+                       val backgroundColor: Int = Color.YELLOW)
     : BreakableSpan, DataSpan, IntegratedBgSpan {
     override var isShow = false
     private var styleSpan: Any? = null
@@ -21,7 +25,7 @@ class MentionUser(val name: String = "sunhapper")
 
     val spannableString: Spannable
         get() {
-            styleSpan = ForegroundColorSpan(Color.MAGENTA)
+            styleSpan = ForegroundColorSpan(foregroundColor)
             val spannableString = SpannableString(displayText)
             spannableString.setSpan(styleSpan, 0, spannableString.length,
                     Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -35,10 +39,6 @@ class MentionUser(val name: String = "sunhapper")
         get() = "@$name"
 
 
-    override fun toString(): String {
-        return "MentionUser{name=$name}"
-    }
-
     override fun isBreak(spannable: Spannable): Boolean {
         val spanStart = spannable.getSpanStart(this)
         val spanEnd = spannable.getSpanEnd(this)
@@ -49,5 +49,14 @@ class MentionUser(val name: String = "sunhapper")
         }
         return isBreak
     }
+
+    override fun generateBgSpan(): BackgroundColorSpan {
+        return BackgroundColorSpan(backgroundColor)
+    }
+
+    override fun toString(): String {
+        return "MentionUser(userId='$userId', name='$name', foregroundColor=$foregroundColor, backgroundColor=$backgroundColor, isShow=$isShow)"
+    }
+
 
 }

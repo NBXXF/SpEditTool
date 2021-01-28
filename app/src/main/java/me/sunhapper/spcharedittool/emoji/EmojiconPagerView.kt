@@ -1,8 +1,8 @@
 package me.sunhapper.spcharedittool.emoji
 
 import android.content.Context
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import android.util.AttributeSet
 import android.view.View
 import android.widget.AdapterView.OnItemClickListener
@@ -11,9 +11,9 @@ import me.sunhapper.spcharedittool.R
 import java.util.*
 import kotlin.math.max
 
-class EmojiconPagerView @JvmOverloads constructor(private val mContext: Context, attrs: AttributeSet? = null) : ViewPager(mContext, attrs) {
+class EmojiconPagerView @JvmOverloads constructor(private val mContext: Context, attrs: AttributeSet? = null) : androidx.viewpager.widget.ViewPager(mContext, attrs) {
     private lateinit var groupEntities: List<EmojiconGroupEntity>
-    private lateinit var pagerAdapter: PagerAdapter
+    private lateinit var pagerAdapter: androidx.viewpager.widget.PagerAdapter
     private val emojiconRows = 3
     private var emojiconColumns = 7
     private var firstGroupPageSize: Int = 0

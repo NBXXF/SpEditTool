@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context="me.sunhapper.spcharedittool.ui.MainActivity">
 
-    <com.sunhapper.x.spedit.view.SpXEditText
+    <com.sunhapper.x.spedit.view.SuperSpXEditText
         android:id="@+id/spEdt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -126,4 +126,4 @@
 
     </me.sunhapper.spcharedittool.emoji.EmojiconMenu>
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

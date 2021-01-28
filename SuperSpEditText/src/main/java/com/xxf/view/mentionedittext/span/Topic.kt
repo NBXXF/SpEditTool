@@ -1,4 +1,4 @@
-package me.sunhapper.spcharedittool.data
+package com.xxf.view.mentionedittext.span
 
 import android.graphics.Color
 import android.text.Spannable
@@ -10,7 +10,7 @@ import com.sunhapper.x.spedit.mention.span.BreakableSpan
 /**
  * Created by sunhapper on 2019/1/30 .
  */
-class Topic : BreakableSpan, DataSpan {
+open class Topic : BreakableSpan, DataSpan {
     private val text = "topic"
     private var styleSpan: Any? = null
     private val displayText: String

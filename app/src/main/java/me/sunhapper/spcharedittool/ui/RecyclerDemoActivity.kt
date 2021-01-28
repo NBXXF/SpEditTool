@@ -2,10 +2,10 @@ package me.sunhapper.spcharedittool.ui
 
 import android.os.Build
 import android.os.Bundle
-import android.support.annotation.RequiresApi
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.Spanned
@@ -33,7 +33,7 @@ class RecyclerDemoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_demo)
-        gif_recyclerView.layoutManager = LinearLayoutManager(this)
+        gif_recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         gif_recyclerView.adapter = adapter
         EmojiManager.getDefaultEmojiData(object : OnUnzipSuccessListener {
             @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -54,7 +54,7 @@ class RecyclerDemoActivity : AppCompatActivity() {
 
     }
 
-    internal inner class Adapter : RecyclerView.Adapter<ViewHolder>() {
+    internal inner class Adapter : androidx.recyclerview.widget.RecyclerView.Adapter<ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
@@ -79,7 +79,7 @@ class RecyclerDemoActivity : AppCompatActivity() {
     }
 
 
-    internal inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    internal inner class ViewHolder(itemView: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
 
         var textView: TextView = itemView.findViewById(R.id.textView)
 

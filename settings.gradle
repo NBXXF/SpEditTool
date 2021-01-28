@@ -1,1 +1,2 @@
+include ':SuperSpEditText'
 include ':app', ':SpEditText', ':SpGlideDrawable', ':SpGifDrawable'

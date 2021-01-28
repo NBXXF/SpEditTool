@@ -9,7 +9,7 @@ import java.util.*
 /**
  * Created by sunhapper on 2019/1/25 .
  */
-class SpXTextView : android.support.v7.widget.AppCompatTextView {
+open class SpXTextView : androidx.appcompat.widget.AppCompatTextView {
 
     constructor(context: Context) : super(context)
 
