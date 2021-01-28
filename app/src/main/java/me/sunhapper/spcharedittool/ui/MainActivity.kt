@@ -3,7 +3,10 @@ package me.sunhapper.spcharedittool.ui
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Editable
+import android.text.Selection
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
@@ -33,6 +36,42 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         spEdt.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+        spEdt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+//                System.out.println("==========>onTextChanged:" + s + "  " + start + " " + before + "   " + count)
+//                var substring = s.substring(0, start)
+//                val lastIndexOf = substring.lastIndexOf("@")
+//                if (lastIndexOf >= 0) {
+//                    substring=s.substring(lastIndexOf,start);
+//                    val spans = spEdt.text.getSpans(lastIndexOf, substring.length, DataSpan::class.java)
+//                    if (spans != null && spans.size > 0) {
+//                        System.out.println("==========>已经有了")
+//                    }else{
+//                        System.out.println("==========>立即搜索"+substring)
+//                    }
+//                }
+            }
+
+            override fun afterTextChanged(s: Editable) {
+                val start = Selection.getSelectionEnd(s);
+                var substring = s.substring(0, start)
+                val lastIndexOf = substring.lastIndexOf("@")
+                if (lastIndexOf >= 0) {
+                    substring=s.substring(lastIndexOf,start);
+                    val spans = spEdt.text.getSpans(lastIndexOf, substring.length, DataSpan::class.java)
+                    if (spans != null && spans.size > 0) {
+                        System.out.println("==========>已经有了")
+                    }else{
+                        System.out.println("==========>立即搜索"+substring)
+                    }
+                }
+            }
+        })
+
         emojiInputView.listener = { emoji ->
             if (emoji is DeleteEmoji) {
                 if (!TextUtils.isEmpty(spEdt.text)) {
