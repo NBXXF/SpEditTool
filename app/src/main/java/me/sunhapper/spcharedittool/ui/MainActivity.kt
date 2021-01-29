@@ -34,12 +34,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         spEdt.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
-        spEdt.addTextChangedListener(object : SuperSpXEditText.OnAtTextWatcher() {
-            override fun onAtMatched(matched: String?) {
-                System.out.println("==========>立即搜索" + matched)
-            }
+        spEdt.onTagMatchListener = object : SuperSpXEditText.OnTagMatchListener {
 
-        })
+            override fun onTagMatch(tag: String, matched: String?) {
+                System.out.println("==========>立即搜索" + tag + "  " + matched)
+            }
+        }
 
         emojiInputView.listener = { emoji ->
             if (emoji is DeleteEmoji) {
