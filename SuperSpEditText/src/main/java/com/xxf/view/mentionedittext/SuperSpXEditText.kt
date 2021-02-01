@@ -5,7 +5,10 @@ import android.text.*
 import androidx.annotation.CallSuper
 import android.util.AttributeSet
 import android.util.Log
+import android.view.MotionEvent
 import com.sunhapper.x.spedit.insertSpannableString
+import com.sunhapper.x.spedit.mention.span.IntegratedBgSpan
+import com.sunhapper.x.spedit.mention.span.IntegratedSpan
 import com.sunhapper.x.spedit.view.SpXEditText
 import com.xxf.view.mentionedittext.span.DataSpan
 import com.xxf.view.mentionedittext.span.MentionUser
@@ -71,6 +74,26 @@ open class SuperSpXEditText : SpXEditText {
             e.printStackTrace()
             Log.d("======>", "match fail" + e);
         }
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return super.onTouchEvent(event)
+    }
+
+    /**
+     * 点击的时候 清理 高亮背景文字
+     */
+    override fun performClick(): Boolean {
+        if (!TextUtils.isEmpty(text)) {
+            val integratedSpans = text!!.getSpans(selectionStart, selectionEnd, IntegratedBgSpan::class.java)
+            if (integratedSpans != null && integratedSpans.size > 0) {
+                integratedSpans.firstOrNull {
+                    it.removeBg(text!!);
+                    true;
+                }
+            }
+        }
+        return super.performClick()
     }
 
     interface OnTagMatchListener {
